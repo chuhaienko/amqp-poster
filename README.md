@@ -3,6 +3,11 @@ A library for building communication between microservices.
 It has simple and small API.
 It works with amqplib and oriented to RabbitMQ.
 
+# Installation
+```
+npm install amqp-poster
+```
+
 # API
 
 ## Instance
@@ -42,4 +47,5 @@ poster.messageHandler(function (message) {
 ```
 
 ```message``` - object or other variable was sent
+
 ```answer``` - object or other variable to send as answer. Can be Promised value
