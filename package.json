@@ -1,0 +1,32 @@
+{
+  "name": "amqp-poster",
+  "version": "1.0.0",
+  "description": "Poster for rabbitmq. RPC",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chuhaienko/amqp-poster.git"
+  },
+  "keywords": [
+    "amqp",
+    "rabbitqm",
+    "rpc",
+    "poster"
+  ],
+  "author": "Yurii Chuhaienko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chuhaienko/amqp-poster/issues"
+  },
+  "homepage": "https://github.com/chuhaienko/amqp-poster#readme",
+  "dependencies": {
+    "amqplib": "^0.5.1"
+  }
+}

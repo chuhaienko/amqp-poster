@@ -1,0 +1,24 @@
+# App
+public/userpics/*
+!public/userpics/nouserpic.png
+public/images/*
+!public/images/noimage.png
+conf.js
+
+# IDE
+.idea
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Node
+/node_modules
+/assets/node_modules
+/coverage.html
