@@ -36,6 +36,7 @@ poster.sendMessage('ServiceName', message)
 ```
 
 ```message``` - object or other variable to send
+```answer``` - response object. It contains ```data``` and ```error``` properties
 
 ## Message Handler for incoming messages
 ```

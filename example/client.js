@@ -7,10 +7,14 @@ let poster = new Poster({
 	server: 'amqp://localhost',
 });
 
-let message = [1, 2, 3, 4, 5];
-console.log('I send message', message);
 
-poster.sendMessage('Multiplier', message)
-.then((answer) => {
-	console.log('I got answer', answer);
-});
+setInterval(() => {
+	let message = Date.now();
+
+	console.log('I send message', message);
+
+	poster.sendMessage('Multiplier', message)
+	.then((answer) => {
+		console.log('I got answer', answer);
+	});
+}, 5000);

@@ -8,23 +8,20 @@ let poster = new Poster({
 	name:   'Multiplier',
 });
 
-poster.messageHandler(function (mesage) {
-	console.log('I got message', mesage);
+poster.messageHandler(function (message) {
+	console.log('I got message', message);
 
-	let answer = mesage.reduce((acc, v) => {
-		return acc + v;
-	}, 0);
+	if (message % 2) {
+		throw new Error('Message is odd!!!');
+	}
 
-	console.log('I will answer', answer, 'in second');
+	let delayTime = parseInt(Math.random() * 3000);
+
+	console.log('I will answer in', delayTime, 'ms');
 
 	return new Promise((resolve) => {
 		setTimeout(() => {
-			resolve(answer);
-		}, 1000);
+			resolve(delayTime);
+		}, delayTime);
 	});
-});
-
-poster.sendMessage('Multiplier', [3, 4, 5])
-.then((answer) => {
-	console.log('Answer for own request', answer);
 });
