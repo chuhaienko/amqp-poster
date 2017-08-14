@@ -21,7 +21,7 @@ const poster = new Poster({
 });
 ```
 
-```server``` - path for RabbitQM server
+```server``` - path for RabbitMQ server
 
 ```name``` - Service name. Also it is recipient name. It can be empty, and then app does not wait for incoming messages, except for answers.
 

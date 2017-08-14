@@ -1,6 +1,6 @@
 {
   "name": "amqp-poster",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Poster for rabbitmq. RPC",
   "main": "index.js",
   "directories": {
