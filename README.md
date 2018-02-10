@@ -15,38 +15,62 @@ npm install amqp-poster
 const Poster = require('amqp-poster');
 
 const poster = new Poster({
-	server:   'amqp://localhost',
-	name:     'ServiceName',
-	prefetch: 1
+	server:    'amqp://localhost',
+	name:      'QueueNameForListening',
+	prefetch:  1,
+	subscribe: 'ExchangeNameForSubscribing'
 });
 ```
 
-```server``` - path for RabbitMQ server
+```server``` - path for RabbitMQ server (or connection object for `amqp.connect()`)
 
-```name``` - Service name. Also it is recipient name. It can be empty, and then app does not wait for incoming messages, except for answers.
+```name``` - Service name. Also it is queue name for listening. If it is empty then app does not wait for incoming messages, except for answers.
 
 ```prefetch``` - How many message service can process at one time
 
+```subscribe``` - Name of exchange for listening for broadcast messages
+
 ## Send messages
 ```
-poster.sendMessage('ServiceName', message)
-.then((answer) => {
+poster.send('ServiceName', reqObj)
+.then((respObj) => {
 	// some logic
+})
+.catch((err) => {
+	// Handle error
 });
 ```
 
-```message``` - object or other variable to send
-```answer``` - response object. It contains ```data``` and ```error``` properties
+```reqObj``` - object or other variable to send
+
+```respObj``` - response object
+
+```err``` - error from respond-side
 
 ## Message Handler for incoming messages
 ```
-poster.messageHandler(function (message) {
+poster.setMessageHandler(function (reqObj) {
 	// some logic
 	
-	return answer;
+	// throw new Error('Some error');
+	// or
+	
+	return respObj;
 });
 ```
 
-```message``` - object or other variable was sent
+```reqObj``` - object or other variable was sent
 
-```answer``` - object or other variable to send as answer. Can be Promised value
+```respObj``` - object or other variable to send as answer. Can be Promised value
+
+## Publish broadcast message
+```
+poster.publish('ExchangeName', reqObj);
+```
+
+## Handle broadcast messages
+```
+poster.setBroadcastHandler(function (reqObj) {
+	// some logic
+});
+```

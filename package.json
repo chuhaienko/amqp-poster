@@ -1,6 +1,6 @@
 {
   "name": "amqp-poster",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "Poster for rabbitmq. RPC",
   "main": "index.js",
   "directories": {
@@ -18,7 +18,8 @@
     "amqp",
     "rabbitqm",
     "rpc",
-    "poster"
+    "poster",
+    "pubsub"
   ],
   "author": "Yurii Chuhaienko",
   "license": "MIT",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/chuhaienko/amqp-poster#readme",
   "dependencies": {
-    "amqplib": "^0.5.1"
+    "amqplib": "^0.5.1",
+    "bluebird": "^3.5.1"
   }
 }
