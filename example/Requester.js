@@ -20,7 +20,7 @@ poster.init()
 			console.log(`Got answer: ${JSON.stringify(respObj)}`);
 		})
 		.catch((err) => {
-			console.log(`Catch Error: ${err}`);
+			console.log('Catch Error:', err);
 		});
 	}, 1000);
 });

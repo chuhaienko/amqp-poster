@@ -30,7 +30,11 @@ poster.init()
 		poster.publish('NewNumber', respObj);
 
 		if (Math.random() < 0.3) {
-			throw new Error('Error happens');
+			let error = new Error('Error happens');
+			error.isFromApp = true;
+			error.saomeKey = 'someValue';
+
+			throw error;
 		}
 
 		return respObj;
