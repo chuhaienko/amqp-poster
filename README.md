@@ -40,7 +40,7 @@ const Poster = require('amqp-poster');
 }
 ```
 | key | required | type | description |
----------------------------------------
+|-----|----------|------|-------------|
 | name                       | true | string  | Service name. Also it is queue name for listening |
 | uid                        |      | string  | String to identify owned queues |
 | subscribe                  |      | array   | Collection of exchanges to subscribe |
