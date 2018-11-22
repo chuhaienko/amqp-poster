@@ -9,15 +9,18 @@
 const Poster = require('../index');
 
 
-const poster = new Poster({
-	server:   'amqp://localhost',
-	name:     'Responder',
-	prefetch: 10
-});
+(async () => {
+	const poster = new Poster({
+		name:     'Responder',
+		uid:      String(process.pid),
+		server:   'amqp://localhost',
+		prefetch: 10
+	});
 
+	await poster.init();
 
-poster.init()
-.then(() => {
+	console.log(`Responder started with pid ${process.pid}`);
+
 	poster.setMessageHandler((reqObj) => {
 		console.log(`Got request ${JSON.stringify(reqObj)}`);
 
@@ -32,12 +35,13 @@ poster.init()
 		if (Math.random() < 0.3) {
 			let error = new Error('Error happens');
 			error.isFromApp = true;
-			error.saomeKey = 'someValue';
+			error.saomeKey = Date.now();
+
+			poster.publish('Error', error);
 
 			throw error;
 		}
 
 		return respObj;
 	});
-});
-
+})();

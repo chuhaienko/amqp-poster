@@ -3,15 +3,25 @@
 const Poster = require('../index');
 
 
-const poster = new Poster({
-	server:   'amqp://localhost',
-	prefetch: 1,
-	subscribe: 'NewNumber'
-});
+(async () => {
+	const poster = new Poster({
+		name:      'Logger',
+		uid:       String(process.pid),
+		server:    'amqp://localhost',
+		prefetch:  1,
+		subscribe: [{
+			exchange: 'NewNumber',
+		}, {
+			exchange:       'Error',
+			oncePerService: true,
+		}]
+	});
 
-poster.init()
-.then(() => {
+	await poster.init();
+
+	console.log(`Logger started with pid ${process.pid}`);
+
 	poster.setBroadcastHandler(function (dataObj) {
 		console.log(`Receive broadcast message ${JSON.stringify(dataObj)}`);
 	});
-});
+})();

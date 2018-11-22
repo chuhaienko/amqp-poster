@@ -3,13 +3,18 @@
 const Poster = require('../index');
 
 
-const poster = new Poster({
-	server:   'amqp://localhost',
-	prefetch: 1,
-});
+(async () => {
+	const poster = new Poster({
+		name:     'Requester',
+		uid:      String(process.pid),
+		server:   'amqp://localhost',
+		prefetch: 1,
+	});
 
-poster.init()
-.then(() => {
+	await poster.init();
+
+	console.log(`Requester started with pid ${process.pid}`);
+
 	setInterval(() => {
 		let reqObj = {from: Date.now() - 10, to: Date.now()};
 
@@ -20,7 +25,7 @@ poster.init()
 			console.log(`Got answer: ${JSON.stringify(respObj)}`);
 		})
 		.catch((err) => {
-			console.log('Catch Error:', err);
+			console.log('Catch Error:', JSON.stringify(err));
 		});
 	}, 1000);
-});
+})();

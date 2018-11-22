@@ -14,31 +14,50 @@ npm install amqp-poster
 ```
 const Poster = require('amqp-poster');
 
-const poster = new Poster({
-	server:    'amqp://localhost',
-	name:      'QueueNameForListening',
-	prefetch:  1,
-	subscribe: 'ExchangeNameForSubscribing'
-});
+(async () => {
+	const poster = new Poster(options);
+	
+	await poster.init();
+})();
 ```
 
-```server``` - path for RabbitMQ server (or connection object for `amqp.connect()`)
-
-```name``` - Service name. Also it is queue name for listening. If it is empty then app does not wait for incoming messages, except for answers.
-
-```prefetch``` - How many message service can process at one time
-
-```subscribe``` - Name of exchange for listening for broadcast messages
+### `options`
+```
+{
+	name: 'TestService',
+	uid:  'inst1',
+	subscribe: [{
+		exchange:       '',
+		oncePerService: true
+	}],
+	prefetch: 10,
+	server: {
+		port:     5672,
+		hostname: 'localhost',
+		username: 'guest',
+		password: 'guest'
+	}
+}
+```
+| key | required | type | description |
+---------------------------------------
+| name                       | true | string  | Service name. Also it is queue name for listening |
+| uid                        |      | string  | String to identify owned queues |
+| subscribe                  |      | array   | Collection of exchanges to subscribe |
+| subscribe[].exchange       | true | string  | Name of exchange to subscribe |
+| subscribe[].oncePerService |      | boolean | Apply round robin to messages for one service by name (default false) |
+| prefetch                   |      | integer | How many messages process at one time (default 1) |
+| server                     | true | string  | Connection url like 'amqp://guest:guest@localhost:5672' |
+| server                     | true | object  | Object of connection config. May have next keys: protocol, hotname, port, username, password, locale, frameMax, heartbeat, vhost| 
 
 ## Send messages
 ```
-poster.send('ServiceName', reqObj)
-.then((respObj) => {
+try {
+	let resp = await poster.send('ServiceName', reqObj)
 	// some logic
-})
-.catch((err) => {
+} catch (err) {
 	// Handle error
-});
+}
 ```
 
 ```reqObj``` - object or other variable to send
@@ -49,7 +68,7 @@ poster.send('ServiceName', reqObj)
 
 ## Message Handler for incoming messages
 ```
-poster.setMessageHandler(function (reqObj) {
+poster.setMessageHandler(async (reqObj) => {
 	// some logic
 	
 	// throw new Error('Some error');
@@ -65,7 +84,7 @@ poster.setMessageHandler(function (reqObj) {
 
 ## Publish broadcast message
 ```
-poster.publish('ExchangeName', reqObj);
+await poster.publish('ExchangeName', reqObj);
 ```
 
 ## Handle broadcast messages

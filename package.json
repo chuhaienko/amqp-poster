@@ -1,8 +1,11 @@
 {
   "name": "amqp-poster",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "Poster for rabbitmq. RPC",
   "main": "index.js",
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "directories": {
     "example": "example",
     "lib": "lib"
@@ -28,7 +31,8 @@
   },
   "homepage": "https://github.com/chuhaienko/amqp-poster#readme",
   "dependencies": {
-    "amqplib": "^0.5.1",
-    "bluebird": "^3.5.1"
+    "amqplib": "^0.5.2",
+    "joi": "^14.1.0",
+    "uuid": "^3.3.2"
   }
 }
