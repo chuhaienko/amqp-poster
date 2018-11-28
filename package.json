@@ -1,6 +1,6 @@
 {
   "name": "amqp-poster",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Poster for rabbitmq. RPC",
   "main": "index.js",
   "engines": {
@@ -19,7 +19,7 @@
   },
   "keywords": [
     "amqp",
-    "rabbitqm",
+    "rabbitmq",
     "rpc",
     "poster",
     "pubsub"
